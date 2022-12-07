@@ -1,0 +1,103 @@
+body, html {
+    margin: 0;
+    padding: 0;
+
+    height: 99vh;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+
+    padding-left: 15px;
+
+    gap: 5px;   
+}
+
+nav {
+    height: 3%;
+}
+
+.bfeditor {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+.first-row {
+    flex-grow: 5;
+}
+
+.editor {
+    display: flex;
+    flex-direction: column;
+
+    flex-grow: 4;
+
+    height: 100%;
+}
+
+.editor-view {
+    height: 100%;
+    border: 1px solid black;
+    
+    overflow: auto;
+
+}
+
+.editor-view:focus {
+    outline: 0;
+}
+
+.stack {
+    flex-grow: 1;
+
+    display: flex;
+    flex-direction: column;
+
+
+    height: 100%;
+}
+
+.stack-view {
+    height: 100%;
+    border: 1px solid black
+}
+
+.second-row {
+    flex: 2;
+}
+
+.input {
+    flex-grow: 2;
+    
+    display: flex;
+    flex-direction: column;
+}
+
+.input-view {
+    height: 100%;
+    border: 1px solid black;
+}
+
+.input-view:focus {
+    outline: 0;
+}
+
+.output {
+    flex-grow: 2;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.output-view {
+    height: 100%;
+    border: 1px solid black;
+}
