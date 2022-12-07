@@ -6,13 +6,15 @@
     <title>Document</title>
     <link rel="stylesheet" href="index.css">
     <script src="index.js" defer></script>
+    <script src="util.js" defer></script>
+    <script src="interpret.js" defer></script>
 </head>
 <body>
     <nav>
         <button>
             File
         </button>
-        <button>
+        <button id="run">
             Run
         </button>
     </nav>
@@ -22,7 +24,7 @@
                 <div class="editor-title">
                     Main Editor
                 </div>
-                <div class="editor-view" contenteditable="true">
+                <div class="editor-view" id="editor" contenteditable="true">
                 </div>
             </div>
             <div class="stack">
@@ -47,7 +49,7 @@
                 <div class="output-title">
                     Output
                 </div>
-                <div class="output-view">
+                <div class="output-view" id="output">
 
                 </div>
             </div>
