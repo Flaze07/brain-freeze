@@ -104,7 +104,7 @@ const intrepeter = new BFInterpreter()
 
 document.getElementById("run").onclick = () => {
     const input = document.getElementById("input")
-    const inputstream = new Inputstream(input)
+    const inputstream = new InputStream(input)
 
     const output = document.getElementById("output")
     const outputStream = new OutputStream(output)
