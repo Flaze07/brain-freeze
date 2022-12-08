@@ -33,6 +33,7 @@ nav {
 
 .first-row {
     flex-grow: 5;
+    max-height: 70%;
 }
 
 .editor {
@@ -73,10 +74,12 @@ nav {
 
 .second-row {
     flex: 2;
+    max-height: 30%;
 }
 
 .input {
-    flex-grow: 2;
+    min-width: 50%;
+    max-width: 50%;
     
     display: flex;
     flex-direction: column;
@@ -85,6 +88,9 @@ nav {
 .input-view {
     height: 100%;
     border: 1px solid black;
+
+    word-wrap: break-word;
+    overflow-y: auto;
 }
 
 .input-view:focus {
@@ -92,7 +98,8 @@ nav {
 }
 
 .output {
-    flex-grow: 2;
+    min-width: 50%;
+    max-width: 50%;
 
     display: flex;
     flex-direction: column;
@@ -101,4 +108,7 @@ nav {
 .output-view {
     height: 100%;
     border: 1px solid black;
+
+    word-wrap: break-word;
+    overflow-y: auto;
 }
