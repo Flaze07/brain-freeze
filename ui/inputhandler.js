@@ -1,7 +1,7 @@
 class InputStream {
     /**
      * 
-     * @param {HTMLInputElement} input 
+     * @param {HTMLElement} input 
      */
     constructor(input) {
         this.inputIndex = 0
