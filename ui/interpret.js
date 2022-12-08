@@ -34,27 +34,28 @@ class BFInterpreter {
     }
 
     clean(codes) {
-        return codes.filter(e => ",.<>[]-=".includes(e))
+        return codes.filter(e => ",.<>[]-+".includes(e))
     }
 
     parse(tokens) {
-        this.loopStack = []
+        const loopStack = []
         this.loopPair.clear()
         /**
          * using every because forEach is unable to return a value and stops execution
          */
         const succeed = tokens.every((token, index) => {
             if(token == "[") {
-                this.loopStack.push(index)
+                loopStack.push(index)
             } else if(token == "]") {
-                if(this.loopStack.length == 0) {
+                if(loopStack.length == 0) {
                     return false
                 }
-                const loopCloseToken = this.loopStack.pop()
+                const loopCloseToken = loopStack.pop()
                 
                 this.loopPair.set(index, loopCloseToken)
                 this.loopPair.set(loopCloseToken, index)
             }
+            return true
         })
 
         return succeed
@@ -108,8 +109,9 @@ document.getElementById("run").onclick = () => {
 
     const output = document.getElementById("output")
     const outputStream = new OutputStream(output)
+    outputStream.clear()
 
-    const codeString = document.getElementById("editor")
+    const codeString = document.getElementById("editor").textContent
     const codeArr = Array.from(codeString)
     
     intrepeter.interpret(codeArr, inputstream, outputStream)
