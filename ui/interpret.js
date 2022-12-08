@@ -23,10 +23,10 @@ class BFInterpreter {
         this.stackIndex = 0
 
         const tokens = this.clean(codes)
-        const succeed = this.parse(tokens)
+        const {succeed, error} = this.parse(tokens)
 
         if(!succeed) {
-            //TODO: handle showing errors
+            output.writeError(error)
             return
         }
 
@@ -40,6 +40,7 @@ class BFInterpreter {
     parse(tokens) {
         const loopStack = []
         this.loopPair.clear()
+        let error = ""
         /**
          * using every because forEach is unable to return a value and stops execution
          */
@@ -48,6 +49,7 @@ class BFInterpreter {
                 loopStack.push(index)
             } else if(token == "]") {
                 if(loopStack.length == 0) {
+                    error = `Error at index: ${index} close loop without opening`
                     return false
                 }
                 const loopCloseToken = loopStack.pop()
@@ -58,7 +60,7 @@ class BFInterpreter {
             return true
         })
 
-        return succeed
+        return {succeed, error}
     }
 
     execute(tokens, input, output) {
