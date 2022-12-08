@@ -69,22 +69,32 @@ class BFInterpreter {
                 this.stack[this.stackIndex] = input.readByte()
             } else if(token == '+') {
                 this.stack[this.stackIndex]++
+                if(this.stack[this.stackIndex] > 255) {
+                    //TODO: HANDLING STACK INDEX VALUE GOING OVER THE LIMIT
+                }
             } else if(token == '-') {
                 this.stack[this.stackIndex]--
+                if(this.stack[this.stackIndex] < 0) {
+                    //TODO: HANDLING NEGATIVE STACK INDEX VALUE
+                }
             } else if(token == '<') {
                 this.stackIndex--
                 if(this.stackIndex < 0) {
-                    //TODO: HANDLER ERROR MADE BY TRYING TO GO TO NEGATIVE STACK INDEX
+                    //TODO: HANDLING ERROR MADE BY TRYING TO GO TO NEGATIVE STACK INDEX
                 }
             } else if(token == '>') {
                 this.stackIndex++
                 if(this.stackIndex >= 30000) {
-                    //TODO: HANDLER ERROR MADE BY GOING OVER THE STACK COUNT
+                    //TODO: HANDLING ERROR MADE BY GOING OVER THE STACK COUNT
                 }
             } else if(token == '[') {
-                //TODO: IMPLEMENT LOOPING OPENING
+                if(this.stack[this.stackIndex] == 0) {
+                    i = this.loopPair.get(i)
+                }
             } else if(token == ']') {
-                //TODO: IMPLEMENT LOOPING CLOSING
+                if(this.stack[this.stackIndex] != 0) {
+                    i = this.loopPair.get(i)
+                }
             }
         }
     }
