@@ -15,4 +15,8 @@ class OutputStream {
         const charForm = chr(byte)
         this.inner.textContent += charForm
     }
+
+    writeError(stri) {
+        this.inner.textContent = stri
+    }
 }
