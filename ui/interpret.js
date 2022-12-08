@@ -1,43 +1,59 @@
 const output = document.getElementById("output")
 const editor = document.getElementById("editor")
+const input = document.getElementById("input")
 
-function interpret() {
-    output.textContent = "";
-    stack = stack.map(() => 0)
-    const codes = Array.from(editor.textContent).filter(e => ".,<>[]+-".includes(e))
-    bfInterpreter(codes)
-}
+class BFInterpreter {
+    constructor() {
+        this.stack = Array(30000).fill(0)
+        this.loopPair = new Map()
+    }
 
-function bfInterpreter(codes) {
-    let stackIndex = 0;
-    let inputIndex = 0;
-    for(let i = 0; i < codes.length; ++i) {
-        const code = codes[i]
-        if(code == '.') {
-            output.textContent += chr(stack[stackIndex])
-        } else if(code == ',') {
-            //TODO: implement input
-        } else if(code == '<') {
-            stackIndex--
-            if(stackIndex < 0) {
-                alert(`Error on ${i}, trying to access stack on negative index`)
-                return
-            }
-        } else if(code == '>') {
-            stackIndex++
-            if(stackIndex >= stack.length) {
-                alert(`Error on ${i}, out of range`)
-            }
-        } else if(code == '+') {
-            stack[stackIndex]++
-        } else if(code == '-') {
-            stack[stackIndex]--
-        } else if(code == '[') {
-            //TODO: implement loop
-        } else if(code == ']') {
-            //TODO: implement loop
+    /**
+     * 
+     * @param {Array} codes 
+     * @param {*} input 
+     * @param {*} output 
+     */
+    interpret(codes, input, output) {
+        const tokens = this.clean(codes)
+        const succeed = this.parse(tokens)
+
+        if(!succeed) {
+            //TODO: handle showing errors
+            return
         }
+    }
+
+    clean(codes) {
+        return codes.filter(e => ",.<>[]-=".includes(e))
+    }
+
+    parse(tokens) {
+        this.loopStack = []
+        this.loopPair.clear()
+        /**
+         * using every because forEach is unable to return a value and stops execution
+         */
+        const succeed = tokens.every((token, index) => {
+            if(token == "[") {
+                this.loopStack.push(index)
+            } else if(token == "]") {
+                if(this.loopStack.length == 0) {
+                    return false
+                }
+                const loopCloseToken = this.loopStack.pop()
+                
+                this.loopPair.set(index, loopCloseToken)
+                this.loopPair.set(loopCloseToken, index)
+            }
+        })
+
+        return succeed
     }
 }
 
-document.getElementById("run").onclick = interpret
+const intrepeter = new BFInterpreter()
+
+document.getElementById("run").onclick = () => {
+    intrepeter.interpret(Array.from(input.textContent))
+}
