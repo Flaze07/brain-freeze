@@ -39,7 +39,8 @@ nav {
     display: flex;
     flex-direction: column;
 
-    flex-grow: 4;
+    flex-grow: 5;
+    max-width: 78%;
 
     height: 100%;
 }
@@ -61,7 +62,6 @@ nav {
 
     display: flex;
     flex-direction: column;
-
 
     height: 100%;
 }
