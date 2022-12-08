@@ -4,6 +4,7 @@ const input = document.getElementById("input")
 
 class BFInterpreter {
     constructor() {
+        this.stackIndex = 0
         this.stack = Array(30000).fill(0)
         this.loopPair = new Map()
     }
@@ -15,6 +16,12 @@ class BFInterpreter {
      * @param {*} output 
      */
     interpret(codes, input, output) {
+        /**
+         * initiate stack for code execution
+         */
+        this.stack = this.stack.map(e => 0)
+        this.stackIndex = 0
+
         const tokens = this.clean(codes)
         const succeed = this.parse(tokens)
 
@@ -22,6 +29,8 @@ class BFInterpreter {
             //TODO: handle showing errors
             return
         }
+
+        this.execute(tokens, input, output)
     }
 
     clean(codes) {
@@ -49,6 +58,35 @@ class BFInterpreter {
         })
 
         return succeed
+    }
+
+    execute(tokens, input, output) {
+        for(let i = 0; i < tokens.length; ++i) {
+            const token = tokens[i]
+            if(token == '.') {
+                output.writeByte(this.stack[this.stackIndex])
+            } else if(token == ',') {
+                this.stack[this.stackIndex] = input.readByte()
+            } else if(token == '+') {
+                this.stack[this.stackIndex]++
+            } else if(token == '-') {
+                this.stack[this.stackIndex]--
+            } else if(token == '<') {
+                this.stackIndex--
+                if(this.stackIndex < 0) {
+                    //TODO: HANDLER ERROR MADE BY TRYING TO GO TO NEGATIVE STACK INDEX
+                }
+            } else if(token == '>') {
+                this.stackIndex++
+                if(this.stackIndex >= 30000) {
+                    //TODO: HANDLER ERROR MADE BY GOING OVER THE STACK COUNT
+                }
+            } else if(token == '[') {
+                //TODO: IMPLEMENT LOOPING OPENING
+            } else if(token == ']') {
+                //TODO: IMPLEMENT LOOPING CLOSING
+            }
+        }
     }
 }
 
