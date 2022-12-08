@@ -13,5 +13,3 @@ class InputStream {
         return this.inner.textContent[inputIndex - 1]
     }
 }
-
-const inputStream = new InputStream(document.getElementById("input"))
