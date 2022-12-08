@@ -55,5 +55,14 @@ class BFInterpreter {
 const intrepeter = new BFInterpreter()
 
 document.getElementById("run").onclick = () => {
-    intrepeter.interpret(Array.from(input.textContent))
+    const input = document.getElementById("input")
+    const inputstream = new Inputstream(input)
+
+    const output = document.getElementById("output")
+    const outputStream = new OutputStream(output)
+
+    const codeString = document.getElementById("editor")
+    const codeArr = Array.from(codeString)
+    
+    intrepeter.interpret(codeArr, inputstream, outputStream)
 }

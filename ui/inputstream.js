@@ -10,6 +10,6 @@ class InputStream {
 
     readByte() {
         inputIndex = inputIndex + 1
-        return this.inner.textContent[inputIndex - 1]
+        return ord(this.inner.textContent[inputIndex - 1])
     }
 }
